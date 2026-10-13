@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ajo Planner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body id="bg">
+     <main class="app-shell">
+        <header class="topline">
+          <div class="logo">↻</div>
+          <span style="color: white;">77 AJO Planner</span>
+        </header>
+        <section id="setup" class="setup-card">
+          <p class="eyebrow">SIMPLE THRIFT TRACKER</p>
+          <h1>Set up your planner</h1>
+          <p class="intro">
+            Add your members and contribution amount. We’ll track the rotation,
+            pot, and payments for each cycle.
+          </p>
+          <form id="plannerForm" onsubmit="startPlanner(event)">
+            <label for="group">Group / circle name</label
+              ><input
+              type="text"
+              id="group"
+              placeholder="e.g. Office Thrift Circle"
+              maxlength="35"
+              required
+            /><label for="amount">Contribution amount per cycle (₦)</label
+            ><input
+              type="number"
+              id="amount"
+              placeholder="50000"
+              min="1"
+              required
+            /><label for="members"
+              >Members <small>— comma separated, in payout order</small></label
+            ><input
+              type="text"
+              id="members"
+              placeholder="Tunde, Mubarak, Razaq, Hamza"
+              required
+            /><button type="submit">Initialize planner</button>
+          </form>
+        </section>
+        <section id="dashboard" hidden>
+          <div class="dashboard-head">
+            <div>
+              <p class="eyebrow">YOUR SAVINGS CIRCLE</p>
+              <h1 id="dbName"></h1>
+              <p class="sub" id="dbsub"></p>
+            </div>
+            <button class="reset-link" id="resetBtn" onclick="resetPlanner()">
+              Start over
+            </button>
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <div class="num" id="statCycle">—</div>
+              <div class="lbl">Current cycle</div>
+            </div>
+            <div class="stat">
+              <div class="num gold" id="statPot">—</div>
+              <div class="lbl">Pot this cycle</div>
+            </div>
+            <div class="stat">
+              <div class="num" id="statPaid">—</div>
+              <div class="lbl">Contributed so far</div>
+            </div>
+          </div>
+          <div id="completeBanner" class="complete-banner" hidden>
+            <strong>Every member has been paid out 🎉</strong>
+            <p>The circle has completed a full rotation.</p>
+          </div>
+          <p class="section-title">ROTATION ORDER</p>
+          <div class="rotation-list" id="rotationList"></div>
+          <section class="cycle-card" id="cycleCard">
+            <div class="cycle-card-head">
+              <h2 id="cycleTitle">This cycle</h2>
+              <div class="amt" id="cyclePot"></div>
+            </div>
+            <p class="recipient-line">
+              Payout goes to <b id="recipientName"></b> once everyone has
+              contributed.
+            </p>
+            <div id="checkList"></div>
+            <div class="advance-wrap">
+              <button
+                class="advance-btn"
+                id="advanceBtn"
+                onclick="advanceCycle()"
+              >
+                Confirm payout &amp; start next cycle
+              </button>
+              <p class="advance-hint" id="advanceHint"></p>
+            </div>
+          </section>
+          <p class="section-title">HISTORY</p>
+          <div class="history" id="historyList"></div>
+        </section>
+      </main>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+  <script src="script.js"></script>
+  <script>
+    VANTA.GLOBE({
+      el: "#bg",
+    mouseControls: true,
+  touchControls: true,
+  gyroControls: false,
+  minHeight: 200.0,
+  minWidth: 200.0,
+  scale: 1.0,
+  scaleMobile: 1.0,
+  color: 0x1a8f73,        
+  color2: 0x0d3d33,       
+  backgroundColor: 0x080a09, 
+  size: 0.9,
+    });
+  </script>
+  </body>
+</html>
